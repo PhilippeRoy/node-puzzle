@@ -13,6 +13,9 @@
         }
       }
 
+    // Break in chunks of 8 chars to represent a binary number
+    // convert binary number into int(base 10) and convert to String Char
+    // add String char togther to form compressed data
     var start = 0, end = 8;
     while(end <= s.length){
       var sub = s.substring(start, end);
@@ -27,6 +30,7 @@
 
   exports.unpack = function(buffer, cb) {
 
+    // Add leading zeros to binary numbers
     function padding(num, size) {
       var pad = "00000000" + num;
       return pad.substr(pad.length-size);
@@ -35,11 +39,13 @@
     var data = [];
     var s = '';
 
+    // Transform Sting chars into binary numbers
     for(var i = 0; i < buffer.length; i ++){
       var num = buffer.charCodeAt(i);
       s += padding(num.toString(2), 8);
     }
 
+    // Convert 1 and 0 to true and false to represent intial data Array
     for (var i = 0; i < s.length; i++) {
       var sub = s.substring(i, i+1);
 
